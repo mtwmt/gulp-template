@@ -1,7 +1,7 @@
 {
-  "name": "template",
+  "name": "gulp-template",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "gulpfile.js",
   "license": "MIT",
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
@@ -19,5 +19,6 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp.spritesmith": "^6.5.0",
     "susy": "^2.2.12"
-  }
+  },
+  "author": "Ｍandy"
 }

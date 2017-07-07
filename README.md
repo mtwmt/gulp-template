@@ -2,8 +2,8 @@
 
 
 ###  INSTALL
-node.js
-yarn
+node.js  
+yarn [https://yarnpkg.com/zh-Hans/docs/install](https://yarnpkg.com/zh-Hans/docs/install)
 
 安裝pageage套件
 ```
