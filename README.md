@@ -7,10 +7,10 @@ yarn [https://yarnpkg.com/zh-Hans/docs/install](https://yarnpkg.com/zh-Hans/docs
 
 安裝pageage套件
 ```
-$yarn -v
+$ yarn -v
 ```
 
-執行
+執行run
 ```
-$yarn gulp watch
+$ yarn gulp watch
 ```
