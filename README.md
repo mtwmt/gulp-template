@@ -15,7 +15,7 @@ $ yarn -v
 $ yarn gulp watch
 ```
 
-# gulp開發
+### gulp開發
 ```javascript
 //定義名稱為pug的gulp工作
 gulp.task('pug', function() {
