@@ -10,14 +10,24 @@ yarn [https://yarnpkg.com/zh-Hans/docs/install](https://yarnpkg.com/zh-Hans/docs
 $ yarn -v
 ```
 
---執行run for MAC
+執行
+yarn run
 ```
 $ yarn gulp watch
 ```
---執行run for WIN
+
+npm run
 ```
-$ yarn gulp --watch
+在package.json 加上
+
+"scripts": {
+  "watch": "gulp watch"
+},
+
+終端機
+$npm run watch
 ```
+
 
 
 ### gulp開發
