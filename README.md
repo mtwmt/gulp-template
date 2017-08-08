@@ -10,10 +10,15 @@ yarn [https://yarnpkg.com/zh-Hans/docs/install](https://yarnpkg.com/zh-Hans/docs
 $ yarn -v
 ```
 
-執行run
+--執行run for MAC
 ```
 $ yarn gulp watch
 ```
+--執行run for WIN
+```
+$ yarn gulp --watch
+```
+
 
 ### gulp開發
 ```javascript
