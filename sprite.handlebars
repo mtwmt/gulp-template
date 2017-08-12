@@ -1,0 +1,81 @@
+{
+  // Default options
+  'functions': true,
+  'variableNameTransforms': ['dasherize']
+}
+
+{{#block "sprites-comment"}}
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: map-get($icon-home, 'width');
+// }
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+{{/block}}
+{{#block "sprites"}}
+{{#each sprites}}
+${{strings.name}}: (
+  {{strings.bare_name}}: '{{name}}',
+  {{strings.bare_x}}: {{px.x}},
+  {{strings.bare_y}}: {{px.y}},
+  {{strings.bare_offset_x}}: {{px.offset_x}},
+  {{strings.bare_offset_y}}: {{px.offset_y}},
+  {{strings.bare_width}}: {{px.width}},
+  {{strings.bare_height}}: {{px.height}},
+  {{strings.bare_total_width}}: {{px.total_width}},
+  {{strings.bare_total_height}}: {{px.total_height}},
+  {{strings.bare_image}}: '{{{escaped_image}}}'
+);
+{{/each}}
+{{/block}}
+{{#block "spritesheet"}}
+${{spritesheet_info.strings.name}}: (
+  {{spritesheet_info.strings.bare_width}}: {{spritesheet.px.width}},
+  {{spritesheet_info.strings.bare_height}}: {{spritesheet.px.height}},
+  {{spritesheet_info.strings.bare_image}}: '{{{spritesheet.escaped_image}}}',
+  {{spritesheet_info.strings.bare_sprites}}: ({{#each sprites}}${{strings.name}}, {{/each}})
+);
+{{/block}}
+
+{{#block "sprite-functions-comment"}}
+{{#if options.functions}}
+
+// 支援rwd
+// rem已在外有做好函式 所以可以直接引用 函式如下
+// @function rem($target, $context: 16px){
+//    @if $target == 0 { @return 0 }
+//    @return ($target / $context)+ 0rem;
+//  }
+
+// css
+// .edit {
+//  @include sprite($edit);
+// }
+
+// html
+// <i class="edit"></i>
+
+{{/if}}
+{{/block}}
+
+{{#block "sprite-functions"}}
+{{#if options.functions}}
+@mixin sprite($sprite){
+  $icon-width: map-get($sprite, '{{strings.bare_width}}');
+  $icon-height: map-get($sprite, '{{strings.bare_height}}');
+  $sprite-map: url(map-get($sprite, '{{strings.bare_image}}'));
+  $sprite-width: map-get($sprite, '{{strings.bare_total_width}}');
+  $sprite-height: map-get($sprite, '{{strings.bare_total_height}}');
+  $space-top: map-get($sprite, '{{strings.bare_offset_y}}');
+
+  width: rem($icon-width);
+  height: rem($icon-height);
+  display: block;
+  background: inline-images($sprite-map);
+  background-size: percentage($sprite-width / $icon-width)  percentage($sprite-height / $icon-height);
+  background-position: 0 percentage(-1 * $space-top / ($sprite-height - $icon-height)); 
+}
+{{/if}}
+{{/block}}
+
