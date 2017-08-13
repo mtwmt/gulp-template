@@ -1,5 +1,5 @@
 //px to rem
-@function rem($target, $context: 16){
+@function rem($target, $context: 16px){
   @if $target == 0 { @return 0 }
   @return ($target / $context)+ 0rem #{'/*'} #{$context}px #{'*/'};
 }
