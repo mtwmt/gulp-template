@@ -61,10 +61,13 @@ ${{spritesheet_info.strings.name}}: (
 
 {{#block "sprite-functions"}}
 {{#if options.functions}}
+
+.{{options.spriteName}}{ background: inline('{{spritesheet.escaped_image}}'); }
 @mixin sprite($sprite){
   $icon-width: map-get($sprite, '{{strings.bare_width}}');
   $icon-height: map-get($sprite, '{{strings.bare_height}}');
-  $sprite-map: url(map-get($sprite, '{{strings.bare_image}}'));
+  //$sprite-map: url(map-get($sprite, '{{strings.bare_image}}'));
+  //$sprite-map: inline(map-get($sprite, '{{strings.bare_image}}'));
   $sprite-width: map-get($sprite, '{{strings.bare_total_width}}');
   $sprite-height: map-get($sprite, '{{strings.bare_total_height}}');
   $space-top: map-get($sprite, '{{strings.bare_offset_y}}');
@@ -72,10 +75,11 @@ ${{spritesheet_info.strings.name}}: (
   width: rem($icon-width);
   height: rem($icon-height);
   display: block;
-  background: inline-images($sprite-map);
+  //background: $sprite-map;
   background-size: percentage($sprite-width / $icon-width)  percentage($sprite-height / $icon-height);
   background-position: 0 percentage(-1 * $space-top / ($sprite-height - $icon-height)); 
 }
+
+
 {{/if}}
 {{/block}}
-

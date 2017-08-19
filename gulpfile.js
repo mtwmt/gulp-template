@@ -9,10 +9,12 @@ var autoprefixer  = require('gulp-autoprefixer');
 var sourcemaps    = require('gulp-sourcemaps');
 var spritesmith   = require('gulp.spritesmith');
 var imagemin      = require('gulp-imagemin');
+var base64        = require('gulp-base64-inline');
 var fileinclude   = require('gulp-file-include');
 var babel         = require('gulp-babel');
 var prettify      = require('gulp-prettify');
 
+<<<<<<< HEAD
 
 var path = {
   src: 'sourse',
@@ -20,6 +22,8 @@ var path = {
   img: 'images'
 }
 
+=======
+>>>>>>> 48499e09b55c9ecc8fc2113794a01dad20c18f20
 gulp.task('img',function(){
   var images = gulp.src(''+ path.src +'/'+ path.img +'/img/**')
       .pipe(imagemin())
@@ -36,7 +40,10 @@ gulp.task('css',function(){
         padding: 10,
         cssTemplate: 'sprite.handlebars',
         cssFormat: 'scss',
-        algorithm: 'top-down'
+        algorithm: 'top-down',
+        cssOpts:{
+          spriteName: 'icon'
+        }
       }));
   var imgStream = sprite.img
       .pipe(gulp.dest(''+ path.dist +'/'+ path.img +''));
@@ -52,7 +59,12 @@ gulp.task('css',function(){
         }).on('error',sass.logError))
       .pipe(autoprefixer())
       .pipe(sourcemaps.write())
+<<<<<<< HEAD
       .pipe(gulp.dest(''+ path.dist +'/css'));
+=======
+      .pipe(base64('../../public/images'))
+      .pipe(gulp.dest('public/css'));
+>>>>>>> 48499e09b55c9ecc8fc2113794a01dad20c18f20
   return sprite, imgStream, cssStream, scss;
 });
 

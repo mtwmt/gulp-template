@@ -10,6 +10,7 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-babel": "^6.1.2",
+    "gulp-base64-inline": "^1.0.3",
     "gulp-file-include": "^1.1.0",
     "gulp-imagemin": "^3.3.0",
     "gulp-plumber": "^1.1.0",
@@ -20,8 +21,13 @@
     "gulp.spritesmith": "^6.5.0",
     "susy": "^2.2.12"
   },
+<<<<<<< HEAD
   "scripts": {
     "watch": "gulp watch"
   },
   "author": "Mandy"
+=======
+  "author": "Mandy",
+  "repository": "https://mtwmt@github.com/mtwmt/gulp-template.git"
+>>>>>>> 48499e09b55c9ecc8fc2113794a01dad20c18f20
 }
