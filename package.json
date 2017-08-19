@@ -21,6 +21,13 @@
     "gulp.spritesmith": "^6.5.0",
     "susy": "^2.2.12"
   },
+<<<<<<< HEAD
+  "scripts": {
+    "watch": "gulp watch"
+  },
+  "author": "Mandy"
+=======
   "author": "Mandy",
   "repository": "https://mtwmt@github.com/mtwmt/gulp-template.git"
+>>>>>>> 48499e09b55c9ecc8fc2113794a01dad20c18f20
 }
