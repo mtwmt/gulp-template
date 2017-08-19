@@ -1,0 +1,118 @@
+// SCSS variables are information about icon's compiled state, stored under its original file name
+//
+// .icon-home {
+//   width: map-get($icon-home, 'width');
+// }
+//
+// At the bottom of this section, we provide information about the spritesheet itself
+$k: (
+  name: 'k',
+  x: 0px,
+  y: 170px,
+  offset-x: 0px,
+  offset-y: -170px,
+  width: 259px,
+  height: 258px,
+  total-width: 275px,
+  total-height: 718px,
+  image: '../images/icon.png'
+);
+$pdf: (
+  name: 'pdf',
+  x: 0px,
+  y: 34px,
+  offset-x: 0px,
+  offset-y: -34px,
+  width: 25px,
+  height: 25px,
+  total-width: 275px,
+  total-height: 718px,
+  image: '../images/icon.png'
+);
+$pixnet: (
+  name: 'pixnet',
+  x: 0px,
+  y: 69px,
+  offset-x: 0px,
+  offset-y: -69px,
+  width: 82px,
+  height: 33px,
+  total-width: 275px,
+  total-height: 718px,
+  image: '../images/icon.png'
+);
+$point: (
+  name: 'point',
+  x: 0px,
+  y: 112px,
+  offset-x: 0px,
+  offset-y: -112px,
+  width: 36px,
+  height: 48px,
+  total-width: 275px,
+  total-height: 718px,
+  image: '../images/icon.png'
+);
+$talkclub: (
+  name: 'talkclub',
+  x: 0px,
+  y: 0px,
+  offset-x: 0px,
+  offset-y: 0px,
+  width: 235px,
+  height: 24px,
+  total-width: 275px,
+  total-height: 718px,
+  image: '../images/icon.png'
+);
+$tit-school: (
+  name: 'tit_school',
+  x: 0px,
+  y: 438px,
+  offset-x: 0px,
+  offset-y: -438px,
+  width: 275px,
+  height: 280px,
+  total-width: 275px,
+  total-height: 718px,
+  image: '../images/icon.png'
+);
+$spritesheet: (
+  width: 275px,
+  height: 718px,
+  image: '../images/icon.png',
+  sprites: ($k, $pdf, $pixnet, $point, $talkclub, $tit-school, )
+);
+
+
+// rem已在外有做好函式 所以可以直接引用 函式如下
+// @function rem($target, $context: 16px){
+//    @if $target == 0 { @return 0 }
+//    @return ($target / $context)+ 0rem;
+//  }
+
+// css
+// .edit {
+//  @include sprite($edit);
+// }
+
+// html
+// <i class="edit"></i>
+
+
+@mixin sprite($sprite){
+  $icon-width: map-get($sprite, 'width');
+  $icon-height: map-get($sprite, 'height');
+  $sprite-map: url(map-get($sprite, 'image'));
+  $sprite-width: map-get($sprite, 'total-width');
+  $sprite-height: map-get($sprite, 'total-height');
+  $space-top: map-get($sprite, 'offset-y');
+
+  width: rem($icon-width);
+  height: rem($icon-height);
+  display: block;
+  background: inline-images($sprite-map);
+  background-size: percentage($sprite-width / $icon-width)  percentage($sprite-height / $icon-height);
+  background-position: 0 percentage(-1 * $space-top / ($sprite-height - $icon-height)); 
+}
+

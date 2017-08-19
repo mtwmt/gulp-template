@@ -4,6 +4,7 @@
 @import "_extend.scss";
 @import "_mixin.scss";
 @import "breakpoint";
+@import "icon";
 
 html,body {
 	-webkit-text-size-adjust: 100%;
@@ -15,6 +16,29 @@ html,body {
 
 @include breakpoint(max-width 980px) {
 	body {
-		background-color: blue;
+		background-color:#eee;
 	}
 }
+
+.block{
+	width:100%;
+	height: 100%;
+}
+.icon {
+  @include sprite($k);
+}
+
+.aa{
+	@include sprite($point);
+}
+
+@media (min-width: 320px), (max-width: 320px) { html { font-size: 12px; } }
+@media (min-width: 360px) { html { font-size: 13.5px; } }
+@media (min-width: 400px) { html { font-size: 15px; } }
+// @media (min-width: 440px) { html { font-size: 16.5px; } }
+// @media (min-width: 480px) { html { font-size: 18px; } }
+// @media (min-width: 520px) { html { font-size: 19.5px; } }
+// @media (min-width: 560px) { html { font-size: 21px; } }
+// @media (min-width: 600px) { html { font-size: 22.5px; } }
+// @media (min-width: 640px) { html { font-size: 24px; } }
+// @media (min-width: 701px) { html { font-size: 16px; } }

@@ -20,5 +20,8 @@
     "gulp.spritesmith": "^6.5.0",
     "susy": "^2.2.12"
   },
-  "author": "Ｍandy"
+  "scripts": {
+    "watch": "gulp watch"
+  },
+  "author": "Mandy"
 }
