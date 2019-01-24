@@ -3,11 +3,6 @@
 已更新至 gulp4 請先確認 
 `node 8.11.1` 與 `npm 5.6.0` 以上版本
 
-###  INSTALL
-node.js  
-yarn [https://yarnpkg.com/zh-Hans/docs/install](https://yarnpkg.com/zh-Hans/docs/install)
-
-
 ### 安裝pageage套件
 ```
 $ npm install
