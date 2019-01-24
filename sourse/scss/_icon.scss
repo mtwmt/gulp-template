@@ -5,86 +5,63 @@
 // }
 //
 // At the bottom of this section, we provide information about the spritesheet itself
-$k: (
-  name: 'k',
-  x: 0px,
-  y: 170px,
-  offset-x: 0px,
-  offset-y: -170px,
-  width: 259px,
-  height: 258px,
-  total-width: 275px,
-  total-height: 718px,
-  image: '../images/icon.png'
-);
-$pdf: (
-  name: 'pdf',
-  x: 0px,
-  y: 34px,
-  offset-x: 0px,
-  offset-y: -34px,
-  width: 25px,
-  height: 25px,
-  total-width: 275px,
-  total-height: 718px,
-  image: '../images/icon.png'
-);
-$pixnet: (
-  name: 'pixnet',
-  x: 0px,
-  y: 69px,
-  offset-x: 0px,
-  offset-y: -69px,
-  width: 82px,
-  height: 33px,
-  total-width: 275px,
-  total-height: 718px,
-  image: '../images/icon.png'
-);
-$point: (
-  name: 'point',
-  x: 0px,
-  y: 112px,
-  offset-x: 0px,
-  offset-y: -112px,
-  width: 36px,
-  height: 48px,
-  total-width: 275px,
-  total-height: 718px,
-  image: '../images/icon.png'
-);
-$talkclub: (
-  name: 'talkclub',
+$i-fb: (
+  name: 'i_fb',
   x: 0px,
   y: 0px,
   offset-x: 0px,
   offset-y: 0px,
-  width: 235px,
-  height: 24px,
-  total-width: 275px,
-  total-height: 718px,
+  width: 14px,
+  height: 29px,
+  total-width: 32px,
+  total-height: 146px,
   image: '../images/icon.png'
 );
-$tit-school: (
-  name: 'tit_school',
+$i-line: (
+  name: 'i_line',
   x: 0px,
-  y: 438px,
+  y: 39px,
   offset-x: 0px,
-  offset-y: -438px,
-  width: 275px,
-  height: 280px,
-  total-width: 275px,
-  total-height: 718px,
+  offset-y: -39px,
+  width: 30px,
+  height: 29px,
+  total-width: 32px,
+  total-height: 146px,
+  image: '../images/icon.png'
+);
+$i-twitter: (
+  name: 'i_twitter',
+  x: 0px,
+  y: 78px,
+  offset-x: 0px,
+  offset-y: -78px,
+  width: 28px,
+  height: 29px,
+  total-width: 32px,
+  total-height: 146px,
+  image: '../images/icon.png'
+);
+$i-wechat: (
+  name: 'i_wechat',
+  x: 0px,
+  y: 117px,
+  offset-x: 0px,
+  offset-y: -117px,
+  width: 32px,
+  height: 29px,
+  total-width: 32px,
+  total-height: 146px,
   image: '../images/icon.png'
 );
 $spritesheet: (
-  width: 275px,
-  height: 718px,
+  width: 32px,
+  height: 146px,
   image: '../images/icon.png',
-  sprites: ($k, $pdf, $pixnet, $point, $talkclub, $tit-school, )
+  sprites: ($i-fb, $i-line, $i-twitter, $i-wechat, )
 );
 
 
+// 支援rwd
 // rem已在外有做好函式 所以可以直接引用 函式如下
 // @function rem($target, $context: 16px){
 //    @if $target == 0 { @return 0 }
@@ -100,10 +77,13 @@ $spritesheet: (
 // <i class="edit"></i>
 
 
+
+.icon{ background: inline('../images/icon.png'); }
 @mixin sprite($sprite){
   $icon-width: map-get($sprite, 'width');
   $icon-height: map-get($sprite, 'height');
-  $sprite-map: url(map-get($sprite, 'image'));
+  //$sprite-map: url(map-get($sprite, 'image'));
+  //$sprite-map: inline(map-get($sprite, 'image'));
   $sprite-width: map-get($sprite, 'total-width');
   $sprite-height: map-get($sprite, 'total-height');
   $space-top: map-get($sprite, 'offset-y');
@@ -111,8 +91,9 @@ $spritesheet: (
   width: rem($icon-width);
   height: rem($icon-height);
   display: block;
-  background: inline-images($sprite-map);
+  //background: $sprite-map;
   background-size: percentage($sprite-width / $icon-width)  percentage($sprite-height / $icon-height);
   background-position: 0 percentage(-1 * $space-top / ($sprite-height - $icon-height)); 
 }
+
 
