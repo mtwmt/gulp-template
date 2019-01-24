@@ -77,11 +77,14 @@ var html = function() {
   return gulp
     .src(['sourse/*.html', 'sourse/**/*.html'])
     .pipe(plumber())
+    .pipe(fileinclude({
+      prefix: '@@'
+    }))
     .pipe(prettify({ indent_size: 2 }))
     .pipe(gulp.dest('public'));
 };
 
-let clean = function() {
+var clean = function() {
   return del(['public/include/**', 'public/scss/**']);
 };
 
@@ -91,7 +94,8 @@ var watchfile = function() {
   gulp.watch('sourse/scss/*.scss', css);
   gulp.watch('sourse/js/*.js', js);
   gulp.watch(['sourse/*.html', 'sourse/**/*.html'], html);
+  gulp.watch(['public'], clean);
 };
 
-const watch = gulp.series(clean, watchfile);
+const watch = gulp.series(clean, gulp.parallel(watchfile));
 exports.default = watch;
