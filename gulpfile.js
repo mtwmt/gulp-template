@@ -17,14 +17,14 @@ const fileinclude = require('gulp-file-include');
 const babel = require('gulp-babel');
 const prettify = require('gulp-prettify');
 
-let img = function() {
+var img = function() {
   return gulp
     .src('sourse/images/img/**')
     .pipe(imagemin())
     .pipe(gulp.dest('public/images'));
 };
 
-let sprite = function() {
+var sprite = function() {
   var spriteData = gulp
     .src('sourse/images/*/*.png')
     .pipe(
@@ -48,7 +48,7 @@ let sprite = function() {
   return merge(imgStream, cssStream);
 };
 
-let css = function() {
+var css = function() {
   return gulp
     .src('sourse/scss/*.scss')
     .pipe(plumber())
@@ -64,7 +64,7 @@ let css = function() {
     .pipe(gulp.dest('public/css'));
 };
 
-let js = function() {
+var js = function() {
   return gulp
     .src('sourse/js/*.js')
     .pipe(plumber())
@@ -73,7 +73,7 @@ let js = function() {
     .pipe(gulp.dest('public/js'));
 };
 
-let html = function() {
+var html = function() {
   return gulp
     .src(['sourse/*.html', 'sourse/**/*.html'])
     .pipe(plumber())
@@ -85,7 +85,7 @@ let clean = function() {
   return del(['public/include/**', 'public/scss/**']);
 };
 
-let watchfile = function() {
+var watchfile = function() {
   gulp.watch('sourse/images/img/**', img);
   gulp.watch('sourse/images/icon/**', sprite);
   gulp.watch('sourse/scss/*.scss', css);
@@ -94,7 +94,4 @@ let watchfile = function() {
 };
 
 const watch = gulp.series(clean, watchfile);
-
-exports.sprite = sprite;
-
 exports.default = watch;

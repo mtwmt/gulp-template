@@ -67,12 +67,10 @@ $spritesheet: (
 //    @if $target == 0 { @return 0 }
 //    @return ($target / $context)+ 0rem;
 //  }
-
 // css
 // .edit {
 //  @include sprite($edit);
 // }
-
 // html
 // <i class="edit"></i>
 
