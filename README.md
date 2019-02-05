@@ -30,5 +30,8 @@ $ npm install gulp-cli
   "watch": "gulp"
 },
 ```
-
+npm run
+```
+$ 
+```
 
