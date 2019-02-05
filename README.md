@@ -32,6 +32,6 @@ $ npm install gulp-cli
 ```
 npm run
 ```
-$ 
+$ npm run gulp
 ```
 
