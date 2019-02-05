@@ -8,7 +8,27 @@
 ```
 $ npm install
 ```
+
+### gulp-cli全域
+```
+$ npm install gulp-cli -g
+```
+
 npm run
 ```
 $ gulp
 ```
+---
+
+### gulp-cli區域
+```
+$ npm install gulp-cli
+```
+在package.json 加寫一串執行指令
+```
+"scripts": {
+  "watch": "gulp"
+},
+```
+
+
