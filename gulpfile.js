@@ -1,56 +1,77 @@
-'use strict';
-
-// Load plugins
-const gulp = require('gulp');
+const { series, parallel, src, dest, watch } = require('gulp');
+const browserSync = require('browser-sync').create();
+const reload = browserSync.reload;
 const del = require('del');
 const sass = require('gulp-sass');
 const plumber = require('gulp-plumber');
 const autoprefixer = require('gulp-autoprefixer');
 const sourcemaps = require('gulp-sourcemaps');
 const spritesmith = require('gulp.spritesmith');
-// 將 spritesmith 的 img,scss 分開輸出 需加裝 merge
 const merge = require('merge-stream');
 const imagemin = require('gulp-imagemin');
 const base64 = require('gulp-base64-inline');
 const fileinclude = require('gulp-file-include');
-// 要加裝 babel-preset-env
 const babel = require('gulp-babel');
-const prettify = require('gulp-prettify');
+const prettier = require('gulp-prettier');
 
-var img = function() {
-  return gulp
-    .src('sourse/images/img/**')
-    .pipe(imagemin())
-    .pipe(gulp.dest('public/images'));
-};
-
-var sprite = function() {
-  var spriteData = gulp
-    .src('sourse/images/*/*.png')
+function img() {
+  return src('src/images/img/**/!(_)*')
     .pipe(
-      spritesmith({
-        imgName: 'icon.png',
-        cssName: '_icon.scss',
-        imgPath: '../images/icon.png',
-        padding: 10,
-        cssTemplate: 'sprite.handlebars',
-        cssFormat: 'scss',
-        algorithm: 'top-down',
-        cssOpts: {
-          spriteName: 'icon',
-        },
-      })
-    );
+      imagemin([
+        imagemin.gifsicle({ interlaced: true }),
+        imagemin.mozjpeg({ quality: 75, progressive: true }),
+        imagemin.optipng({ optimizationLevel: 5 }),
+        imagemin.svgo({
+          plugins: [{ removeViewBox: true }, { cleanupIDs: false }],
+        }),
+      ])
+    )
+    .pipe(dest('dist/images'));
+}
 
-  var imgStream = spriteData.img.pipe(gulp.dest('public/images'));
-  var cssStream = spriteData.css.pipe(gulp.dest('sourse/scss'));
+function sprite() {
+  let spriteData = src('src/images/sprite/**/*.png').pipe(
+    spritesmith({
+      imgName: '_sprite.png',
+      cssName: '_sprite.scss',
+      imgPath: '_sprite.png',
+      padding: 10,
+      cssTemplate: (data) => {
+        console.log('css', data);
+        let spriteArr = [];
+        data.sprites.forEach(function (sprite) {
+          spriteArr.push(`
+            .${sprite.name} {
+              display: block;
+              width: ${sprite.width / 16}rem;
+              height: ${sprite.height / 16}rem;
+              background-size: ${
+                (data.spritesheet.width / sprite.width) * 100
+              }%  ${(data.spritesheet.height / sprite.height) * 100}%;
+              background-position: 0 ${((-1 * sprite.offset_y) / (data.spritesheet.height - sprite.height)) * 100}%;
+            }
+          `);
+        });
+        spriteArr.push(`
+          .${data.options.spriteName}{ background-image: inline('${data.spritesheet.image}'); }
+        `);
+        return spriteArr.join('');
+      },
+      cssFormat: 'scss',
+      algorithm: 'top-down',
+      cssOpts: {
+        spriteName: 'icon',
+      },
+    })
+  );
+  let cssStream = spriteData.css.pipe(prettier()).pipe(dest('src/scss'));
+  let imgStream = spriteData.img.pipe(dest('src/images/img'));
 
   return merge(imgStream, cssStream);
-};
+}
 
-var css = function() {
-  return gulp
-    .src('sourse/scss/*.scss')
+function css() {
+  return src('src/scss/**/*.scss')
     .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(
@@ -59,43 +80,53 @@ var css = function() {
         includePaths: [''],
       }).on('error', sass.logError)
     )
+    .pipe(base64('../images/img'))
     .pipe(autoprefixer())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('public/css'));
-};
+    .pipe(dest('dist/css'));
+}
 
-var js = function() {
-  return gulp
-    .src('sourse/js/*.js')
+function js() {
+  return src('src/js/*.js')
     .pipe(plumber())
-    .pipe(babel({ presets: ['env'] }))
     .pipe(sourcemaps.init({ loadMaps: true }))
-    .pipe(gulp.dest('public/js'));
-};
+    .pipe(babel({ presets: ['@babel/env'] }))
+    .pipe(sourcemaps.write())
+    .pipe(dest('dist/js'));
+}
 
-var html = function() {
-  return gulp
-    .src(['sourse/*.html', 'sourse/**/*.html'])
+function html() {
+  return src('src/**/!(_)*.html')
     .pipe(plumber())
-    .pipe(fileinclude({
-      prefix: '@@'
-    }))
-    .pipe(prettify({ indent_size: 2 }))
-    .pipe(gulp.dest('public'));
-};
+    .pipe(
+      fileinclude({
+        prefix: '@@',
+      })
+    )
+    .pipe(dest('./dist'));
+}
 
-var clean = function() {
-  return del(['public/include/**', 'public/scss/**']);
-};
+function clean() {
+  return del(['dist/**']).then(() => {
+    console.log('init...');
+  });
+}
 
-var watchfile = function() {
-  gulp.watch('sourse/images/img/**', img);
-  gulp.watch('sourse/images/icon/**', sprite);
-  gulp.watch('sourse/scss/*.scss', css);
-  gulp.watch('sourse/js/*.js', js);
-  gulp.watch(['sourse/*.html', 'sourse/**/*.html'], html);
-  gulp.watch(['public'], clean);
-};
+function watchList() {
+  browserSync.init({
+    server: {
+      baseDir: 'dist',
+    },
+    port: 5000,
+  });
 
-const watch = gulp.series(clean, gulp.parallel(watchfile));
-exports.default = watch;
+  watch(['src/images/img/**'], series(img));
+  watch(['src/images/sprite/**'], series(sprite));
+  watch(['src/scss/**/*.scss'], series(css));
+  watch(['src/js/*.js'], series(js));
+  watch(['src/**/*.html'], series(html));
+  watch(['src/**']).on('unlink', series(clean, parallel(img, sprite, css, js, html)));
+  watch(['dist/**']).on('change', reload);
+}
+
+exports.watch = watchList;

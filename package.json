@@ -1,18 +1,18 @@
 {
-  "name": "template",
-  "version": "2.0.0",
-  "description": "template",
+  "name": "gulp-template",
+  "version": "3.0.0",
+  "description": "Mandy's gulp4 template develop",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "gulp watch"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mtwmt/gulp-template.git"
   },
   "keywords": [
-    "gulp"
+    "gulp",
+    "gulp4"
   ],
   "author": "Mandy",
   "license": "ISC",
@@ -20,22 +20,23 @@
     "url": "https://github.com/mtwmt/gulp-template/issues"
   },
   "homepage": "https://github.com/mtwmt/gulp-template#readme",
-  "dependencies": {
-    "@babel/core": "^7.2.2",
-    "babel-preset-env": "^1.7.0",
-    "del": "^3.0.0",
-    "gulp": "^4.0.0",
-    "gulp-autoprefixer": "^6.0.0",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "browser-sync": "^2.26.7",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.1",
     "gulp-babel": "^8.0.0",
-    "gulp-base64-inline": "^1.0.4",
-    "gulp-cli": "^2.0.1",
-    "gulp-file-include": "^2.0.1",
-    "gulp-imagemin": "^5.0.3",
+    "gulp-base64-inline": "^1.0.6",
+    "gulp-file-include": "^2.2.2",
+    "gulp-imagemin": "^7.1.0",
     "gulp-plumber": "^1.2.1",
-    "gulp-prettify": "^0.5.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp.spritesmith": "^6.9.0",
-    "merge-stream": "^1.0.1"
+    "gulp-prettier": "^3.0.0",
+    "gulp-sass": "^4.1.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp.spritesmith": "^6.11.0",
+    "merge-stream": "^2.0.0",
+    "node-sass": "^4.14.1"
   }
 }

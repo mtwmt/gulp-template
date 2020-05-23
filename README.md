@@ -1,37 +1,25 @@
 # gulp-template
 
-已更新至 gulp4 請先確認 
+- 20200524 gulp-template 更新 加上了 browser-sync sprite 的 cssTemplate 也重新寫過
+
+已更新至 gulp4 請先確認
 
 `node 8.11.1` 與 `npm 5.6.0` 以上版本
 
-### 安裝pageage套件
+### 安裝 pageage 套件
+
 ```
 $ npm install
 ```
 
-### gulp-cli全域
+### gulp-cli 全域
+
 ```
 $ npm install gulp-cli -g
 ```
 
-npm run
-```
-$ gulp
-```
----
+gulp run
 
-### gulp-cli區域
 ```
-$ npm install gulp-cli
+gulp watch
 ```
-在package.json 加寫一串執行指令
-```
-"scripts": {
-  "watch": "gulp"
-},
-```
-npm run
-```
-$ npm run gulp
-```
-
