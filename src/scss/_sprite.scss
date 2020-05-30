@@ -1,0 +1,35 @@
+.i_fb {
+  display: block;
+  width: 0.875rem;
+  height: 1.8125rem;
+  background-size: 228.57142857142856% 503.44827586206895%;
+  background-position: 0 0%;
+}
+
+.i_line {
+  display: block;
+  width: 1.875rem;
+  height: 1.8125rem;
+  background-size: 106.66666666666667% 503.44827586206895%;
+  background-position: 0 33.33333333333333%;
+}
+
+.i_twitter {
+  display: block;
+  width: 1.75rem;
+  height: 1.8125rem;
+  background-size: 114.28571428571428% 503.44827586206895%;
+  background-position: 0 66.66666666666666%;
+}
+
+.i_wechat {
+  display: block;
+  width: 2rem;
+  height: 1.8125rem;
+  background-size: 100% 503.44827586206895%;
+  background-position: 0 100%;
+}
+
+.icon {
+  background-image: inline("_sprite.png");
+}
