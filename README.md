@@ -1,6 +1,7 @@
 # gulp-template
 
 - 20200524 gulp-template 更新 加上了 browser-sync sprite 的 cssTemplate 也重新寫過
+- 20200602 加上了 icon font 的設定
 
 已更新至 gulp4 請先確認
 
